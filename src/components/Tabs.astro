@@ -1,0 +1,55 @@
+---
+import About from './About.astro';
+import Archives from './Archives.astro';
+import NotFound from './NotFound.astro';
+
+interface Props {
+  initialTab: 'about' | 'archives' | 'pictures';
+  children?: any;
+}
+const { initialTab = 'about', children } = Astro.props as Props;
+---
+<div>
+  <header class="tab-header">
+    <a href="/" class="site-title">PALIMPSEST</a>
+    <nav class="tabs-nav">
+      <a href="#" class="tab-link" data-tab="about">About</a>
+      <a href="#" class="tab-link" data-tab="archives">Archives</a>
+      <a href="#" class="tab-link" data-tab="pictures">Pictures</a>
+    </nav>
+  </header>
+  <section class="tab-content">
+    <div class="tab-panel" data-content="about"><About/></div>
+    <div class="tab-panel" data-content="archives"><Archives/></div>
+    <div class="tab-panel" data-content="pictures"><NotFound/></div>
+  </section>
+</div>
+
+<script is:inline>
+  (() => {
+    const tabs = document.querySelectorAll('.tab-link');
+    const panels = document.querySelectorAll('.tab-panel');
+    let active = "about";
+
+    function update() {
+      tabs.forEach(a => {
+        const t = a.getAttribute('data-tab');
+        a.classList.toggle('active', t === active);
+      });
+      panels.forEach(div => {
+        const t = div.getAttribute('data-content');
+        div.style.display = t === active ? '' : 'none';
+      });
+    }
+
+    tabs.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        active = a.getAttribute('data-tab');
+        update();
+      });
+    });
+
+    update();
+  })();
+</script>

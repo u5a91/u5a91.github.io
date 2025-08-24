@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><title>自己紹介</title><link rel="stylesheet" href="/styles.css"><script type="module">window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head> <body> <div class="wrapper"> <!-- ここがポイント：Reactコンポーネントをクライアントで水和 --> <div> <header class="tab-header"> <a href="/" class="site-title">PALIMPSEST</a> <nav class="tabs-nav"> <a href="#" class="tab-link" data-tab="about">About</a> <a href="#" class="tab-link" data-tab="archives">Archives</a> <a href="#" class="tab-link" data-tab="pictures">Pictures</a> </nav> </header> <section class="tab-content"> <div class="tab-panel" data-content="about"><article> <img src="/images/nijntje.jpg" alt="Nijntje" loading="lazy" style="max-width:100%; height:auto; margin-bottom:1rem;"> <meta charset="utf-8"><h1 id="about-me">About me</h1>
+<p>宇佐(うさ)です. ゆるく絵を描いたり散歩したり写真を撮ったり勉強したりしています.
+応用数学, 漫画, 萌え, セカイ系, うさぎに関心があります. よろしくおねがいします.</p>
+<h1 id="link">Link</h1>
+<ul>
+<li><strong>Twitter</strong> : @u5am1</li>
+<li><strong>Bluesky</strong> : @usamurai.bsky.social</li>
+<li><strong>Discord</strong> : u5a91</li>
+<li><strong>pixiv</strong> : @u5am1</li>
+<li><strong>GitHub</strong> : u5a91</li>
+</ul> </article></div> <div class="tab-panel" data-content="archives"><nav> <h2>Archives</h2> <ul> <li><a href="/posts/test">テスト記事</a></li> </ul> </nav></div> <div class="tab-panel" data-content="pictures"><article> <h2>ギャラリーは準備中です</h2> <meta charset="utf-8"><h1 id="ページが見つかりません">ページが見つかりません</h1>
+<p>お探しのページは存在しないか、削除された可能性があります。</p> </article></div> </section> </div> <script>
+  (() => {
+    const tabs = document.querySelectorAll('.tab-link');
+    const panels = document.querySelectorAll('.tab-panel');
+    let active = "about";
+
+    function update() {
+      tabs.forEach(a => {
+        const t = a.getAttribute('data-tab');
+        a.classList.toggle('active', t === active);
+      });
+      panels.forEach(div => {
+        const t = div.getAttribute('data-content');
+        div.style.display = t === active ? '' : 'none';
+      });
+    }
+
+    tabs.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        active = a.getAttribute('data-tab');
+        update();
+      });
+    });
+
+    update();
+  })();
+</script> </div> <script type="module">
+  window.MathJax?.typesetPromise();
+</script> </body></html>

@@ -1,0 +1,26 @@
+---
+import type { Frontmatter } from 'astro';
+
+// `import.meta.glob` でマッチするモジュールを取得
+const modules = import.meta.glob('../pages/posts/*.md');
+
+// 各モジュールを動的にインポートして frontmatter を集める
+const posts = await Promise.all(
+  Object.entries(modules).map(async ([path, resolver]) => {
+    const mod = await (resolver as () => Promise<{ frontmatter: Frontmatter }> )();
+    const slug = path.split('/').pop()!.replace(/\.md$/, '');
+    return { slug, title: mod.frontmatter.title ?? slug };
+  })
+);
+
+// 日付や名前順などでソート（ここでは逆順）
+posts.sort((a, b) => b.slug.localeCompare(a.slug));
+---
+<nav>
+  <h2>Archives</h2>
+  <ul>
+    {posts.map(({ slug, title }) => (
+      <li><a href={`/posts/${slug}`}>{title}</a></li>
+    ))}
+  </ul>
+</nav>

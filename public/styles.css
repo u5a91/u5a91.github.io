@@ -1,0 +1,80 @@
+/* public/styles.css */
+
+:root {
+  /* background : lightgray */
+  --bg-color: #b1bcc6;
+
+  /* text : darkgray */
+  --text-color: #000f89;
+
+  /* others : ??? */
+  --accent-color: #555555;
+}
+
+/* background and text */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* header, footer, main : --bg-color */
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-color);
+}
+main,
+footer {
+  background-color: var(--bg-color);
+}
+
+/* a-tag */
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.site-title,
+.tab-link {
+  font-size: 1.875rem; /* about 30px */
+}
+.site-title {
+  font-weight: bold;
+}
+.tab-link {
+  font-weight: normal;
+  padding: 0.25rem 0.5rem;
+}
+.tab-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid currentColor;
+}
+
+.wrapper {
+  /* max width */
+  max-width: 800px;    
+  /* centered */
+  margin: 0 auto;
+  /* inner margin */
+  padding: 0 1rem;     
+}
+
+.tabs-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.tab-link {
+  /* text-lg */
+  font-size: 1.125rem; 
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.tab-link.active {
+  font-weight: bold;
+}

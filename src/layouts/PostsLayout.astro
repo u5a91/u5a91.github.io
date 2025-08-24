@@ -1,0 +1,48 @@
+---
+// src/layouts/PostsLayout.astro
+const { frontmatter, children } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>{frontmatter.title ?? 'PALIMPSEST'}</title>
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- MathJax の設定 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script
+    async
+    id="MathJax-script"
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- ヘッダー：サイトタイトルのみ -->
+    <header class="tab-header">
+      <a href="/" class="site-title">PALIMPSEST</a>
+    </header>
+
+    <!-- 本文スロット -->
+    <section class="tab-content">
+      <slot />
+    </section>
+  </div>
+
+  <!-- 全文描画後に MathJax を走らせる -->
+  <script>
+    window.MathJax?.typesetPromise();
+  </script>
+</body>
+</html>
