@@ -1,0 +1,136 @@
+---
+const BASE = import.meta.env.BASE_URL;
+
+// pics/*.md を列挙して frontmatter を取得
+const modules = import.meta.glob('../pages/pics/*.md');
+
+function toDate(v: any): Date | undefined {
+  if (!v) return undefined;
+  const d = new Date(v);
+  return isNaN(d.getTime()) ? undefined : d;
+}
+
+type PicItem = {
+  slug: string;
+  title: string;
+  date?: Date;
+  updated?: Date;
+  // サムネイルの URL（/images/... などの公開パス）
+  thumb: string;
+};
+
+// frontmatter 例：
+// ---
+// title: "落書きまとめ"
+// date: 2025-08-06
+// updated: 2025-08-23
+// images:
+//   - /images/pics/20250806-1.jpg
+//   - /images/pics/20250806-2.jpg
+// thumbnail: /images/pics/20250806-1.jpg   # ← 必須（この1枚をサムネに）
+// tags: [illust, pen]
+// ---
+
+const items: PicItem[] = await Promise.all(
+  Object.entries(modules).map(async ([path, resolver]) => {
+    const mod: any = await (resolver as any)();
+    const fm = mod.frontmatter ?? {};
+    const slug = path.split('/').pop()!.replace(/\.md$/, '');
+
+    // thumbnail は文字列 URL を想定（/images/...）。必須扱い。
+    const thumb = String(fm.thumbnail ?? '').trim();
+
+    return {
+      slug,
+      title: fm.title ?? slug,
+      date: toDate(fm.date ?? fm.created ?? fm.published),
+      updated: toDate(fm.updated ?? fm.update ?? fm.lastmod ?? fm.modified),
+      thumb,
+    };
+  })
+);
+
+// ソート：updated || date の降順 → slug 逆順
+items.sort((a, b) => {
+  const at = (a.updated ?? a.date)?.getTime() ?? -Infinity;
+  const bt = (b.updated ?? b.date)?.getTime() ?? -Infinity;
+  if (at !== bt) return bt - at;
+  return b.slug.localeCompare(a.slug);
+});
+---
+
+<section class="pics-grid">
+  <style>
+    .pics-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    /* 正方形のサムネ枠（短辺基準で中央クロップ） */
+    .thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;         /* 正方形 */
+      overflow: hidden;             /* はみ出しカット */
+      background: #0001;
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;            /* 短辺にフィット → 余りはトリミング */
+      object-position: top center;      /* 中央を残す */
+      display: block;
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .meta {
+      font-size: .9rem;
+      opacity: .85;
+      display: flex;
+      gap: .6rem;
+      align-items: baseline;
+    }
+    .meta time { font-variant-numeric: tabular-nums; }
+
+    .title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    /* 画像リンクの下線は消す（本文リンクの方針に影響させない） */
+    .tile a { text-decoration: none; }
+  </style>
+
+  {items
+  .filter((it) => it.thumb)  // ← thumb必須
+  .map((it) => (
+    <article class="tile">
+      <a class="thumb"
+   href={`${BASE}pics/${it.slug}`}
+   target="_blank"
+   rel="noopener noreferrer">
+  <img src={`${BASE}${it.thumb.replace(/^\//, '')}`} alt={it.title} loading="lazy" decoding="async" />
+</a>
+
+      <h3 class="title">
+  <a href={`${BASE}pics/${it.slug}`}
+     target="_blank"
+     rel="noopener noreferrer">
+    {it.title}
+  </a>
+</h3>
+      <div class="meta">
+        {it.updated
+          ? <time datetime={it.updated.toISOString()}>{it.updated.toLocaleDateString('ja-JP')}</time>
+          : it.date && <time datetime={it.date.toISOString()}>{it.date.toLocaleDateString('ja-JP')}</time>}
+      </div>
+    </article>
+))}
+</section>

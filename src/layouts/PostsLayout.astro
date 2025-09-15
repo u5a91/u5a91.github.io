@@ -7,6 +7,7 @@ const BASE = import.meta.env.BASE_URL;
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=550" />
   <title>{frontmatter.title ?? 'PALIMPSEST'}</title>
   <link rel="stylesheet" href={`${BASE}styles.css`} />
 
@@ -32,12 +33,18 @@ const BASE = import.meta.env.BASE_URL;
   <div class="wrapper">
     <!-- ヘッダー：サイトタイトルのみ -->
     <header class="tab-header">
-      <a href={BASE} class="site-title">PALIMPSEST</a>
+        <a href={BASE} class="site-title logo-outline" aria-label="PALIMPSEST">
+    <span class="ch">P</span><span class="ch">A</span><span class="ch">L</span><span class="ch">I</span><span class="ch">M</span><span class="ch">P</span><span class="ch">S</span><span class="ch">E</span><span class="ch">S</span><span class="ch">T</span>
+  </a>
+
+
     </header>
 
     <!-- 本文スロット -->
     <section class="tab-content">
-      <slot />
+      <article class="markdown-body">
+        <slot />
+      </article>
     </section>
   </div>
 
@@ -45,5 +52,11 @@ const BASE = import.meta.env.BASE_URL;
   <script>
     window.MathJax?.typesetPromise();
   </script>
+<footer>
+  <div class="wrapper" style="text-align:center;">
+    <p>© 2025 宇佐</p>
+  </div>
+</footer>
+
 </body>
 </html>

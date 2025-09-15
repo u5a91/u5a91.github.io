@@ -6,8 +6,9 @@ const { frontmatter, children } = Astro.props;
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=550" />
 <title>{frontmatter.title ?? 'PALIMPSEST'}</title>
-<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="styles.css" />
 <script>
   window.MathJax = {
     tex: {
@@ -30,6 +31,11 @@ const { frontmatter, children } = Astro.props;
 <!-- ここがポイント：Reactコンポーネントをクライアントで水和 -->
 <Tabs client:load initialTab={frontmatter.initialTab ?? 'about'}> {children} </Tabs>
 </div>
+<footer>
+  <div class="wrapper" style="text-align:center;">
+    <p>© 2025 宇佐</p>
+  </div>
+</footer>
 </body>
 <script type="module">
   window.MathJax?.typesetPromise();

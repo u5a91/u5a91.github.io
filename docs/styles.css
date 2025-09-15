@@ -16,7 +16,8 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
-  font-family: sans-serif;
+  font-family:
+    "Source Han Serif", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif; /* fallback */
 }
 
 /* header, footer, main : --bg-color */
@@ -32,6 +33,12 @@ footer {
   background-color: var(--bg-color);
 }
 
+@media (max-width: 768px) {
+  .tab-content {
+    font-size: 125%;
+  }
+}
+
 /* a-tag */
 a {
   color: var(--text-color);
@@ -40,7 +47,7 @@ a {
 
 .site-title,
 .tab-link {
-  font-size: 1.875rem; /* about 30px */
+  font-size: 1.5rem; /* about 30px */
 }
 .site-title {
   font-weight: bold;
@@ -56,11 +63,11 @@ a {
 
 .wrapper {
   /* max width */
-  max-width: 800px;    
+  max-width: 800px;
   /* centered */
   margin: 0 auto;
   /* inner margin */
-  padding: 0 1rem;     
+  padding: 0 1rem;
 }
 
 .tabs-nav {
@@ -70,11 +77,59 @@ a {
 
 .tab-link {
   /* text-lg */
-  font-size: 1.125rem; 
+  font-size: 1.125rem;
   font-weight: normal;
   cursor: pointer;
 }
 
 .tab-link.active {
   font-weight: bold;
+}
+
+a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.site-footer {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* exceptional */
+.tab-header a,
+.tabs-nav a {
+  text-decoration: none;
+}
+
+/* logo : s-shaped ? */
+.logo-outline {
+  display: inline-flex;
+  gap: 0;
+  line-height: 1;
+}
+.logo-outline .ch {
+  display: inline-block;
+  position: relative;
+  transform-origin: 50% 50%;
+}
+
+.logo-outline span:nth-of-type(7) {
+  transform: scaleX(-1);
+}
+
+.logo-outline .ch:nth-child(7)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.2em;
+  transform: translateX(-50%);
+  width: 0.15em; /* dot */
+  height: 0.15em;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  pointer-events: none;
 }

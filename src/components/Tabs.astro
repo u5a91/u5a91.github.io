@@ -1,6 +1,7 @@
 ---
 import About from './About.astro';
 import Archives from './Archives.astro';
+import Pictures from './Pictures.astro';
 import NotFound from './NotFound.astro';
 
 interface Props {
@@ -11,7 +12,9 @@ const { initialTab = 'about', children } = Astro.props as Props;
 ---
 <div>
   <header class="tab-header">
-    <a href="/" class="site-title">PALIMPSEST</a>
+    <a href="", class="site-title logo-outline" aria-label="PALIMPSEST">
+    <span class="ch">P</span><span class="ch">A</span><span class="ch">L</span><span class="ch">I</span><span class="ch">M</span><span class="ch">P</span><span class="ch">S</span><span class="ch">E</span><span class="ch">S</span><span class="ch">T</span>
+    </a>
     <nav class="tabs-nav">
       <a href="#" class="tab-link" data-tab="about">About</a>
       <a href="#" class="tab-link" data-tab="archives">Archives</a>
@@ -21,7 +24,7 @@ const { initialTab = 'about', children } = Astro.props as Props;
   <section class="tab-content">
     <div class="tab-panel" data-content="about"><About/></div>
     <div class="tab-panel" data-content="archives"><Archives/></div>
-    <div class="tab-panel" data-content="pictures"><NotFound/></div>
+    <div class="tab-panel" data-content="pictures"><Pictures/></div> <!-- danger -->
   </section>
 </div>
 

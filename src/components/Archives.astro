@@ -1,26 +1,126 @@
 ---
-import type { Frontmatter } from 'astro';
+const BASE = import.meta.env.BASE_URL;
 
-// `import.meta.glob` でマッチするモジュールを取得
+// posts/*.md を列挙して frontmatter を集める
 const modules = import.meta.glob('../pages/posts/*.md');
 
-// 各モジュールを動的にインポートして frontmatter を集める
+function toDate(v: any): Date | undefined {
+  if (!v) return undefined;
+  const d = new Date(v);
+  return isNaN(d.getTime()) ? undefined : d;
+}
+
+function toTags(v: any): string[] {
+  const raw = v ?? [];
+  if (Array.isArray(raw)) return raw.map(String);
+  if (typeof raw === 'string') {
+    // カンマ or 空白区切りを配列化
+    return raw.split(/[,\s]+/).map(s => s.trim()).filter(Boolean);
+  }
+  return [];
+}
+
+// frontmatter 例：
+// ---
+// title: "テスト記事"
+// date: 2025-08-06
+// updated: 2025-08-23
+// tags: [essay, diary]
+// ---
+
 const posts = await Promise.all(
   Object.entries(modules).map(async ([path, resolver]) => {
-    const mod = await (resolver as () => Promise<{ frontmatter: Frontmatter }> )();
+    const mod: any = await (resolver as any)();
+    const fm = mod.frontmatter ?? {};
     const slug = path.split('/').pop()!.replace(/\.md$/, '');
-    return { slug, title: mod.frontmatter.title ?? slug };
+
+    // キーのゆらぎに対応
+    const date    = toDate(fm.date ?? fm.created ?? fm.published);
+    const updated = toDate(fm.updated ?? fm.update ?? fm.lastmod ?? fm.modified);
+    const tags    = toTags(fm.tags ?? fm.tag ?? fm.categories ?? fm.category);
+
+    return {
+      slug,
+      title: fm.title ?? slug,
+      date,
+      updated,
+      tags,
+    };
   })
 );
 
-// 日付や名前順などでソート（ここでは逆順）
-posts.sort((a, b) => b.slug.localeCompare(a.slug));
+// 並び順：updated || date の降順 → slug 逆順
+posts.sort((a, b) => {
+  const at = (a.updated ?? a.date)?.getTime() ?? -Infinity;
+  const bt = (b.updated ?? b.date)?.getTime() ?? -Infinity;
+  if (at !== bt) return bt - at;
+  return b.slug.localeCompare(a.slug);
+});
+
+const fmt = (d?: Date) =>
+  d ? d.toLocaleDateString('ja-JP', { year:'numeric', month:'2-digit', day:'2-digit' }) : '';
 ---
-<nav>
-  <h2>Archives</h2>
-  <ul>
-    {posts.map(({ slug, title }) => (
-      <li><a href={`/posts/${slug}`}>{title}</a></li>
-    ))}
-  </ul>
+
+<nav class="archives-list">
+  <style>
+    .archives-list { display:grid; gap:.6rem; }
+
+    .arch-row{
+      display:grid;
+      grid-template-columns: min(20ch, 40vw) 1fr; /* 横に2分割 */
+      column-gap: 1rem;
+      row-gap: .2rem;
+      align-items: start;
+      font-size: inherit;
+    }
+
+    /* 左右のラッパ：各カラム内を縦積み */
+    .arch-left  { grid-column:1; display:flex; flex-direction:column; gap:.2rem; }
+    .arch-right { grid-column:2; display:flex; flex-direction:column; gap:.2rem; }
+
+    /* 中の要素（gridの列指定は不要） */
+    .date    { white-space:nowrap; font-variant-numeric: tabular-nums; }
+    .updated { white-space:nowrap; font-variant-numeric: tabular-nums; }
+
+    .title   { margin:0; font-weight:normal; font-size:1em; }
+    .title a { text-decoration:none; }
+
+    .tags    { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .tag     { border:1px solid currentColor; padding:0 .3rem; border-radius:.3rem; font-size:1em; opacity:.9; }
+
+    @media (max-width:768px){
+      .arch-row { grid-template-columns: min(20ch, 50vw) 1fr; }
+    }
+  </style>
+
+  {posts.map((p) => (
+    <div class="arch-row">
+      <div class="arch-left">
+        <div class="date">
+          {p.date && <time datetime={p.date.toISOString()}>{fmt(p.date)}</time>}
+        </div>
+
+        {p.updated && (
+          <div class="updated">
+            <span>(</span><time datetime={p.updated.toISOString()}>{fmt(p.updated)}</time> <span>Updated)</span>
+          </div>
+        )}
+      </div>
+
+      <div class="arch-right">
+          <h3 class="title">
+              <a href={`${BASE}posts/${p.slug}`} target="_blank" rel="noopener noreferrer">
+              {p.title}
+              </a>
+          </h3>
+
+
+        {p.tags.length > 0 && (
+          <div class="tags">
+            {p.tags.map((t) => <span class="tag">#{t}</span>)}
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
 </nav>

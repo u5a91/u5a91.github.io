@@ -18,8 +18,10 @@
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "katex": "^0.16.22",
+    "prettier": "^3.6.2",
     "rehype-katex": "^7.0.1",
     "rehype-mathjax": "^7.1.0",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "unist-util-visit": "^5.0.0"
   }
 }
