@@ -1,306 +1,41 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=550" />
-    <title>index</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module">
-      window.MathJax = {
-        tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
-        options: {
-          skipHtmlTags: [
-            "script",
-            "noscript",
-            "style",
-            "textarea",
-            "pre",
-            "code",
-          ],
-        },
-      };
-    </script>
-    <script
-      async
-      id="MathJax-script"
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
-    <style>
-      .archives-list[data-astro-cid-ioq6hqdc] {
-        display: grid;
-        gap: 0.6rem;
-      }
-      .arch-row[data-astro-cid-ioq6hqdc] {
-        display: grid;
-        grid-template-columns: min(20ch, 40vw) 1fr;
-        column-gap: 1rem;
-        row-gap: 0.2rem;
-        align-items: start;
-        font-size: inherit;
-      }
-      .arch-left[data-astro-cid-ioq6hqdc] {
-        grid-column: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-      .arch-right[data-astro-cid-ioq6hqdc] {
-        grid-column: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-      .date[data-astro-cid-ioq6hqdc],
-      .updated[data-astro-cid-ioq6hqdc] {
-        white-space: nowrap;
-        font-variant-numeric: tabular-nums;
-      }
-      .title[data-astro-cid-ioq6hqdc] {
-        margin: 0;
-        font-weight: 400;
-        font-size: 1em;
-      }
-      .title[data-astro-cid-ioq6hqdc] a[data-astro-cid-ioq6hqdc] {
-        text-decoration: none;
-      }
-      .tags[data-astro-cid-ioq6hqdc] {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
-      .tag[data-astro-cid-ioq6hqdc] {
-        border: 1px solid currentColor;
-        padding: 0 0.3rem;
-        border-radius: 0.3rem;
-        font-size: 1em;
-        opacity: 0.9;
-      }
-      @media (max-width: 768px) {
-        .arch-row[data-astro-cid-ioq6hqdc] {
-          grid-template-columns: min(20ch, 50vw) 1fr;
-        }
-      }
-      .pics-grid[data-astro-cid-jpf5e3df] {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      }
-      .thumb[data-astro-cid-jpf5e3df] {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
-        background: #0001;
-      }
-      .thumb[data-astro-cid-jpf5e3df] img[data-astro-cid-jpf5e3df] {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top center;
-        display: block;
-      }
-      .tile[data-astro-cid-jpf5e3df] {
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-      .meta[data-astro-cid-jpf5e3df] {
-        font-size: 0.9rem;
-        opacity: 0.85;
-        display: flex;
-        gap: 0.6rem;
-        align-items: baseline;
-      }
-      .meta[data-astro-cid-jpf5e3df] time[data-astro-cid-jpf5e3df] {
-        font-variant-numeric: tabular-nums;
-      }
-      .title[data-astro-cid-jpf5e3df] {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 400;
-      }
-      .tile[data-astro-cid-jpf5e3df] a[data-astro-cid-jpf5e3df] {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- ここがポイント：Reactコンポーネントをクライアントで水和 -->
-      <div>
-        <header class="tab-header">
-          <a href="" , class="site-title logo-outline" aria-label="PALIMPSEST">
-            <span class="ch">P</span><span class="ch">A</span
-            ><span class="ch">L</span><span class="ch">I</span
-            ><span class="ch">M</span><span class="ch">P</span
-            ><span class="ch">S</span><span class="ch">E</span
-            ><span class="ch">S</span><span class="ch">T</span>
-          </a>
-          <nav class="tabs-nav">
-            <a href="#" class="tab-link" data-tab="about">About</a>
-            <a href="#" class="tab-link" data-tab="archives">Archives</a>
-            <a href="#" class="tab-link" data-tab="pictures">Pictures</a>
-          </nav>
-        </header>
-        <section class="tab-content">
-          <div class="tab-panel" data-content="about">
-            <article>
-              <img
-                src="images/nijntje.jpg"
-                alt="Nijntje"
-                loading="lazy"
-                style="
-                  display: block;
-                  max-width: 90%;
-                  height: auto;
-                  margin: 0 auto 1rem;
-                "
-              />
-              <meta charset="utf-8" />
-              <h2 id="about-me">About me</h2>
-              <p>
-                宇佐(うさ)です.
-                ゆるく絵を描いたり散歩したり写真を撮ったり勉強したりしています.
-                数学, 工学, 漫画, 萌え, うさぎにちょっとだけ関心があります.
-                よろしくおねがいします.
-              </p>
-              <h2 id="links">Links</h2>
-              <ul>
-                <li>
-                  <strong>Twitter (X)</strong> :
-                  <a href="https://x.com/u5am1">@u5am1</a>
-                </li>
-                <li>
-                  <strong>Bluesky</strong> :
-                  <a href="https://bsky.app/profile/usamurai.bsky.social"
-                    >@usamurai.bsky.social</a
-                  >
-                </li>
-                <li>
-                  <strong>Discord</strong> :
-                  <a href="https://discordlookup.com/user/967799520765288448"
-                    >@u5a91</a
-                  >
-                </li>
-                <li>
-                  <strong>pixiv</strong> :
-                  <a href="https://www.pixiv.net/users/108945175">@u5am1</a>
-                </li>
-                <li>
-                  <strong>GitHub</strong> :
-                  <a href="https://github.com/u5a91/">@u5a91</a>
-                </li>
-              </ul>
-            </article>
-          </div>
-          <div class="tab-panel" data-content="archives">
-            <nav class="archives-list" data-astro-cid-ioq6hqdc>
-              <div class="arch-row" data-astro-cid-ioq6hqdc>
-                <div class="arch-left" data-astro-cid-ioq6hqdc>
-                  <div class="date" data-astro-cid-ioq6hqdc>
-                    <time
-                      datetime="2025-08-24T00:00:00.000Z"
-                      data-astro-cid-ioq6hqdc
-                      >2025/08/24</time
-                    >
-                  </div>
-                  <div class="updated" data-astro-cid-ioq6hqdc>
-                    <span data-astro-cid-ioq6hqdc>(</span
-                    ><time
-                      datetime="2025-09-15T00:00:00.000Z"
-                      data-astro-cid-ioq6hqdc
-                      >2025/09/15</time
-                    >
-                    <span data-astro-cid-ioq6hqdc>Updated)</span>
-                  </div>
-                </div>
-                <div class="arch-right" data-astro-cid-ioq6hqdc>
-                  <h3 class="title" data-astro-cid-ioq6hqdc>
-                    <a
-                      href="/palimpsest/posts/test"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-astro-cid-ioq6hqdc
-                    >
-                      はじめまして 兼 テスト記事
-                    </a>
-                  </h3>
-                  <div class="tags" data-astro-cid-ioq6hqdc>
-                    <span class="tag" data-astro-cid-ioq6hqdc>#diary</span
-                    ><span class="tag" data-astro-cid-ioq6hqdc>#test</span>
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </div>
-          <div class="tab-panel" data-content="pictures">
-            <section class="pics-grid" data-astro-cid-jpf5e3df>
-              <article class="tile" data-astro-cid-jpf5e3df>
-                <a
-                  class="thumb"
-                  href="/palimpsest/pics/wikipetan"
-                  data-astro-cid-jpf5e3df
-                >
-                  <img
-                    src="/palimpsest/images/pics/wikipetan.png"
-                    alt="ウィキペたん"
-                    loading="lazy"
-                    decoding="async"
-                    data-astro-cid-jpf5e3df
-                  />
-                </a>
-                <h3 class="title" data-astro-cid-jpf5e3df>
-                  <a href="/palimpsest/pics/wikipetan" data-astro-cid-jpf5e3df
-                    >ウィキペたん</a
-                  >
-                </h3>
-                <div class="meta" data-astro-cid-jpf5e3df>
-                  <time
-                    datetime="2025-03-26T00:00:00.000Z"
-                    data-astro-cid-jpf5e3df
-                    >2025/3/26</time
-                  >
-                </div>
-              </article>
-            </section>
-          </div>
-          <!-- danger -->
-        </section>
-      </div>
-      <script>
-        (() => {
-          const tabs = document.querySelectorAll(".tab-link");
-          const panels = document.querySelectorAll(".tab-panel");
-          let active = "about";
+<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><meta name="viewport" content="width=550"><title>index</title><link rel="stylesheet" href="styles.css"><script type="module">window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><style>.archives-list[data-astro-cid-ioq6hqdc]{display:grid;gap:.6rem}.arch-row[data-astro-cid-ioq6hqdc]{display:grid;grid-template-columns:min(20ch,40vw) 1fr;column-gap:1rem;row-gap:.2rem;align-items:start;font-size:inherit}.arch-left[data-astro-cid-ioq6hqdc]{grid-column:1;display:flex;flex-direction:column;gap:.2rem}.arch-right[data-astro-cid-ioq6hqdc]{grid-column:2;display:flex;flex-direction:column;gap:.2rem}.date[data-astro-cid-ioq6hqdc],.updated[data-astro-cid-ioq6hqdc]{white-space:nowrap;font-variant-numeric:tabular-nums}.title[data-astro-cid-ioq6hqdc]{margin:0;font-weight:400;font-size:1em}.title[data-astro-cid-ioq6hqdc] a[data-astro-cid-ioq6hqdc]{text-decoration:none}.tags[data-astro-cid-ioq6hqdc]{display:flex;flex-wrap:wrap;gap:.4rem}.tag[data-astro-cid-ioq6hqdc]{border:1px solid currentColor;padding:0 .3rem;border-radius:.3rem;font-size:1em;opacity:.9}@media (max-width:768px){.arch-row[data-astro-cid-ioq6hqdc]{grid-template-columns:min(20ch,50vw) 1fr}}.pics-grid[data-astro-cid-jpf5e3df]{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.thumb[data-astro-cid-jpf5e3df]{position:relative;width:100%;aspect-ratio:1 / 1;overflow:hidden;background:#0001}.thumb[data-astro-cid-jpf5e3df] img[data-astro-cid-jpf5e3df]{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}.tile[data-astro-cid-jpf5e3df]{display:flex;flex-direction:column;gap:.4rem}.meta[data-astro-cid-jpf5e3df]{font-size:.9rem;opacity:.85;display:flex;gap:.6rem;align-items:baseline}.meta[data-astro-cid-jpf5e3df] time[data-astro-cid-jpf5e3df]{font-variant-numeric:tabular-nums}.title[data-astro-cid-jpf5e3df]{margin:0;font-size:1rem;font-weight:400}.tile[data-astro-cid-jpf5e3df] a[data-astro-cid-jpf5e3df]{text-decoration:none}
+</style></head> <body> <div class="wrapper"> <!-- ここがポイント：Reactコンポーネントをクライアントで水和 --> <div> <header class="tab-header"> <a href="" , class="site-title logo-outline" aria-label="PALIMPSEST"> <span class="ch">P</span><span class="ch">A</span><span class="ch">L</span><span class="ch">I</span><span class="ch">M</span><span class="ch">P</span><span class="ch">S</span><span class="ch">E</span><span class="ch">S</span><span class="ch">T</span> </a> <nav class="tabs-nav"> <a href="#" class="tab-link" data-tab="about">About</a> <a href="#" class="tab-link" data-tab="archives">Archives</a> <a href="#" class="tab-link" data-tab="pictures">Pictures</a> </nav> </header> <section class="tab-content"> <div class="tab-panel" data-content="about"><article> <img src="images/nijntje.jpg" alt="Nijntje" loading="lazy" style="display:block; max-width:90%; height:auto; margin:0 auto 1rem;"> <meta charset="utf-8"><h2 id="about-me">About me</h2>
+<p>宇佐(うさ)です. ゆるく絵を描いたり散歩したり写真を撮ったり勉強したりしています.
+数学, 工学, 漫画, 萌え, うさぎにちょっとだけ関心があります. よろしくおねがいします.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><strong>Twitter (X)</strong> : <a href="https://x.com/u5am1">@u5am1</a></li>
+<li><strong>Bluesky</strong> : <a href="https://bsky.app/profile/usamurai.bsky.social">@usamurai.bsky.social</a></li>
+<li><strong>Discord</strong> : <a href="https://discordlookup.com/user/967799520765288448">@u5a91</a></li>
+<li><strong>pixiv</strong> : <a href="https://www.pixiv.net/users/108945175">@u5am1</a></li>
+<li><strong>GitHub</strong> : <a href="https://github.com/u5a91/">@u5a91</a></li>
+</ul> </article></div> <div class="tab-panel" data-content="archives"><nav class="archives-list" data-astro-cid-ioq6hqdc>  <div class="arch-row" data-astro-cid-ioq6hqdc> <div class="arch-left" data-astro-cid-ioq6hqdc> <div class="date" data-astro-cid-ioq6hqdc> <time datetime="2025-08-24T00:00:00.000Z" data-astro-cid-ioq6hqdc>2025/08/24</time> </div> <div class="updated" data-astro-cid-ioq6hqdc> <span data-astro-cid-ioq6hqdc>(</span><time datetime="2025-09-15T00:00:00.000Z" data-astro-cid-ioq6hqdc>2025/09/15</time> <span data-astro-cid-ioq6hqdc>Updated)</span> </div> </div> <div class="arch-right" data-astro-cid-ioq6hqdc> <h3 class="title" data-astro-cid-ioq6hqdc> <a href="/palimpsest/posts/test" target="_blank" rel="noopener noreferrer" data-astro-cid-ioq6hqdc> はじめまして 兼 テスト記事 </a> </h3> <div class="tags" data-astro-cid-ioq6hqdc> <span class="tag" data-astro-cid-ioq6hqdc>#diary</span><span class="tag" data-astro-cid-ioq6hqdc>#test</span> </div> </div> </div> </nav></div> <div class="tab-panel" data-content="pictures"><section class="pics-grid" data-astro-cid-jpf5e3df>  <article class="tile" data-astro-cid-jpf5e3df> <a class="thumb" href="/palimpsest/pics/ep3" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> <img src="/palimpsest/images/pics/ep3.png" alt="E-P3 をかまえた少女" loading="lazy" decoding="async" data-astro-cid-jpf5e3df> </a> <h3 class="title" data-astro-cid-jpf5e3df> <a href="/palimpsest/pics/ep3" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> E-P3 をかまえた少女 </a> </h3> <div class="meta" data-astro-cid-jpf5e3df> <time datetime="2025-09-13T00:00:00.000Z" data-astro-cid-jpf5e3df>2025/9/13</time> </div> </article><article class="tile" data-astro-cid-jpf5e3df> <a class="thumb" href="/palimpsest/pics/kyoko" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> <img src="/palimpsest/images/pics/kyoko.png" alt="佐倉杏子" loading="lazy" decoding="async" data-astro-cid-jpf5e3df> </a> <h3 class="title" data-astro-cid-jpf5e3df> <a href="/palimpsest/pics/kyoko" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> 佐倉杏子 </a> </h3> <div class="meta" data-astro-cid-jpf5e3df> <time datetime="2025-09-08T00:00:00.000Z" data-astro-cid-jpf5e3df>2025/9/8</time> </div> </article><article class="tile" data-astro-cid-jpf5e3df> <a class="thumb" href="/palimpsest/pics/wikipetan" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> <img src="/palimpsest/images/pics/wikipetan.png" alt="ウィキペたん" loading="lazy" decoding="async" data-astro-cid-jpf5e3df> </a> <h3 class="title" data-astro-cid-jpf5e3df> <a href="/palimpsest/pics/wikipetan" target="_blank" rel="noopener noreferrer" data-astro-cid-jpf5e3df> ウィキペたん </a> </h3> <div class="meta" data-astro-cid-jpf5e3df> <time datetime="2025-03-26T00:00:00.000Z" data-astro-cid-jpf5e3df>2025/3/26</time> </div> </article> </section></div> <!-- danger --> </section> </div> <script>
+  (() => {
+    const tabs = document.querySelectorAll('.tab-link');
+    const panels = document.querySelectorAll('.tab-panel');
+    let active = "about";
 
-          function update() {
-            tabs.forEach((a) => {
-              const t = a.getAttribute("data-tab");
-              a.classList.toggle("active", t === active);
-            });
-            panels.forEach((div) => {
-              const t = div.getAttribute("data-content");
-              div.style.display = t === active ? "" : "none";
-            });
-          }
+    function update() {
+      tabs.forEach(a => {
+        const t = a.getAttribute('data-tab');
+        a.classList.toggle('active', t === active);
+      });
+      panels.forEach(div => {
+        const t = div.getAttribute('data-content');
+        div.style.display = t === active ? '' : 'none';
+      });
+    }
 
-          tabs.forEach((a) => {
-            a.addEventListener("click", (e) => {
-              e.preventDefault();
-              active = a.getAttribute("data-tab");
-              update();
-            });
-          });
+    tabs.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        active = a.getAttribute('data-tab');
+        update();
+      });
+    });
 
-          update();
-        })();
-      </script>
-    </div>
-    <footer>
-      <div class="wrapper" style="text-align: center"><p>© 2025 宇佐</p></div>
-    </footer>
-    <script type="module">
-      window.MathJax?.typesetPromise();
-    </script>
-  </body>
-</html>
+    update();
+  })();
+</script> </div> <footer> <div class="wrapper" style="text-align:center;"> <p>© 2025 宇佐</p> </div> </footer> <script type="module">
+  window.MathJax?.typesetPromise();
+</script> </body></html>

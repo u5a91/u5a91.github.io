@@ -133,3 +133,12 @@ a {
   background-color: var(--text-color);
   pointer-events: none;
 }
+
+/* images */
+.markdown-body img {
+  max-width: 400px;
+  height: auto;
+  display: block; /* ブロック要素にする */
+  margin-left: auto; /* 左右の余白を自動 */
+  margin-right: auto;
+}
