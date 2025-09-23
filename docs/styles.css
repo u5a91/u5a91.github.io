@@ -2,10 +2,10 @@
 
 :root {
   /* background : lightgray */
-  --bg-color: #f4fdff;
+  --bg-color: #fcfeff;
 
   /* text : darkgray */
-  --text-color: #002a7e;
+  --text-color: #0037a4;
 
   /* others : ??? */
   --accent-color: #555555;
@@ -35,7 +35,7 @@ footer {
 
 @media (max-width: 768px) {
   .tab-content {
-    font-size: 125%;
+    font-size: 115%;
   }
 }
 
@@ -138,11 +138,11 @@ a {
 .markdown-body img {
   max-width: 400px;
   height: auto;
-  display: block; /* ブロック要素にする */
-  margin-left: auto; /* 左右の余白を自動 */
+  display: block; 
+  margin-left: auto; 
   margin-right: auto;
 }
 
 .markdown-body { 
-  line-height: 1.5; 
+  line-height: 1.6; 
 }
