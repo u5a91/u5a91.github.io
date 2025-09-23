@@ -2,10 +2,10 @@
 
 :root {
   /* background : lightgray */
-  --bg-color: #b1bcc6;
+  --bg-color: #f4fdff;
 
   /* text : darkgray */
-  --text-color: #000f89;
+  --text-color: #002a7e;
 
   /* others : ??? */
   --accent-color: #555555;
@@ -141,4 +141,8 @@ a {
   display: block; /* ブロック要素にする */
   margin-left: auto; /* 左右の余白を自動 */
   margin-right: auto;
+}
+
+.markdown-body { 
+  line-height: 1.5; 
 }
