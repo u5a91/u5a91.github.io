@@ -1,5 +1,5 @@
 ---
-title: "E-P3 をかまえた少女"
+title: "OLYMPUS PEN E-P3"
 date: 2025-09-13
 images:
   - /images/pics/ep3.png
@@ -8,8 +8,10 @@ layout: "../../layouts/PostsLayout.astro"
 tags: [illustration]
 ---
 
-# E-P3 をかまえた少女
+# OLYMPUS PEN E-P3
 
 ![ep3](/images/pics/ep3.png)
 
-オリキャラ? この子は結構前からいると思います. フィルムカメラはやく買いたいね. 
+オリキャラ? この子は結構前からいると思います. 
+
+フィルムカメラはやく買いたいね. 
