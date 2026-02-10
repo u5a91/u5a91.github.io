@@ -49,13 +49,18 @@ const posts = await Promise.all(
   })
 );
 
-// 並び順：updated || date の降順 → slug 逆順
 posts.sort((a, b) => {
-  const at = (a.updated ?? a.date)?.getTime() ?? -Infinity;
-  const bt = (b.updated ?? b.date)?.getTime() ?? -Infinity;
-  if (at !== bt) return bt - at;
+  const ad = a.date?.getTime() ?? -Infinity;
+  const bd = b.date?.getTime() ?? -Infinity;
+  if (ad !== bd) return bd - ad;
+
+  const au = a.updated?.getTime() ?? -Infinity;
+  const bu = b.updated?.getTime() ?? -Infinity;
+  if (au !== bu) return bu - au;
+
   return b.slug.localeCompare(a.slug);
 });
+
 
 const fmt = (d?: Date) =>
   d ? d.toLocaleDateString('ja-JP', { year:'numeric', month:'2-digit', day:'2-digit' }) : '';
