@@ -17,4 +17,4 @@ title: "自己紹介"
 
 ## Link Exchange
 - [nyaw.net](https://nyaw.net) (うあーさん)
-- [UTSY](https://usty.jp) (現世さん)
+- [UTSY](https://utsy.jp) (現世さん)
