@@ -9,9 +9,6 @@ title: "自己紹介"
 
 ## My Links
 
-- **Twitter (X)** : [@u5am1](https://x.com/u5am1)
-- **Bluesky** : [@usamurai.bsky.social](https://bsky.app/profile/usamurai.bsky.social)
-- **Discord** : [@u5a91](https://discordlookup.com/user/967799520765288448)
 - **pixiv** : [@u5am1](https://www.pixiv.net/users/108945175)
 - **GitHub** : [@u5a91](https://github.com/u5a91/)
 
